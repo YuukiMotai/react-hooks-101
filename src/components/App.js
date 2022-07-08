@@ -22,6 +22,14 @@ const App = () => {
     setContent('')
   }
 
+  const deleteAllEvents = e => {
+    e.preventDefault()
+    const result = window.confirm("全てのイベントを本当に削除しても良いですか？")
+    if(result) dispatch({type: 'DELETE_ALL_EVENTS'})
+  }
+
+  const unCreatable = title === "" || content === ""
+
   return (
     <div className="container-fruid">
       <h4>イベント作成フォーム</h4>
@@ -35,9 +43,8 @@ const App = () => {
           <laberl htmlFor="formEventContent">Content</laberl>
           <textarea className="form-control" id="formEventContent" value={content}
                                              onChange={e =>setContent(e.target.value)} />
-
-          <button className="btn btn-primary" onClick={addEvent}>イベントを作成</button>
-          <button className="btn btn-danger">全てのイベントを削除</button>
+          <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable} >イベントを作成</button>
+          <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length===0}>全てのイベントを削除</button>
         </div>
       </form>
       <h4>イベント一覧</h4>
@@ -50,7 +57,7 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          {state.map((event) => (<Event event={event} dispatch={dispatch} />))}
+          {state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch} />))}
         </tbody>
       </table>
     </div>

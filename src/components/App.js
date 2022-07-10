@@ -4,6 +4,7 @@ import AppContext from '../contexts/AppContext';
 import reducer from '../reducers'
 import EventForm from './EventForm'
 import Events from './Events'
+import OperationLogs from './OperationLogs'
 
 console.log({AppContext})
 
@@ -20,6 +21,7 @@ const App = () => {
         <div className="container-fruid">
           <EventForm />
           <Events />
+          <OperationLogs />
         </div>
       </AppContext.Provider>
     </>
